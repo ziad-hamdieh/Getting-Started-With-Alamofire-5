@@ -9,7 +9,7 @@
 import Alamofire
 import Foundation
 
-enum Endpoint: CustomStringConvertible {
+enum Endpoint {
     // MARK: - Endpoint Cases
     
     // You can add PUT/PATCH/DELETE cases here...
@@ -24,22 +24,13 @@ enum Endpoint: CustomStringConvertible {
             return .post
         }
     }
-    
-    var description: String {
-        switch self {
-        case .GET:
-            return  "https://qi3gnt3l40.execute-api.us-east-1.amazonaws.com/Dev/user?"
-        case .POST:
-            return "https://qi3gnt3l40.execute-api.us-east-1.amazonaws.com/Dev/user"
-        }
-    }
 
     func url() -> URL {
         switch self {
         case .GET:
-            return  URL(string: "https://qi3gnt3l40.execute-api.us-east-1.amazonaws.com/Dev/user?")!
+            return  URL(string: "https://api.ziadhamdieh.com/user?")!
         case .POST:
-            return URL(string: "https://qi3gnt3l40.execute-api.us-east-1.amazonaws.com/Dev/user")!
+            return URL(string: "https://api.ziadhamdieh.com/user")!
         }
     }
 }
