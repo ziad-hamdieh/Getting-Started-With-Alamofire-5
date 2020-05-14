@@ -11,11 +11,11 @@ import Foundation
 
 enum Endpoint {
     // MARK: - Endpoint Cases
-    
+
     // You can add PUT/PATCH/DELETE cases here...
     case GET
     case POST
-    
+
     var httpMethod: HTTPMethod {
         switch self {
         case .GET:
@@ -28,7 +28,7 @@ enum Endpoint {
     func url() -> URL {
         switch self {
         case .GET:
-            return  URL(string: "https://api.ziadhamdieh.com/user?")!
+            return URL(string: "https://api.ziadhamdieh.com/user?")!
         case .POST:
             return URL(string: "https://api.ziadhamdieh.com/user")!
         }

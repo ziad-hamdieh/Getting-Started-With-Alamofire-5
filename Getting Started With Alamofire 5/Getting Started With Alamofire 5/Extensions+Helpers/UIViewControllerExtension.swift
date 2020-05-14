@@ -11,8 +11,8 @@ import UIKit
 
 extension UIViewController {
     func presentAlert(title: String, message: String) {
-        let textNowThemeColor = UIColor.init(red: 160/255, green: 44/255, blue: 222/255, alpha: 1.0)
-        
+        let textNowThemeColor = UIColor(red: 160 / 255, green: 44 / 255, blue: 222 / 255, alpha: 1.0)
+
         let alert = UIAlertController(title: title, message: "\n \(message)", preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel)
         action.setValue(textNowThemeColor, forKey: "titleTextColor")

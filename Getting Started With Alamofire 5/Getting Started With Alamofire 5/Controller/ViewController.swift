@@ -16,23 +16,31 @@ class ViewController: UIViewController {
     @IBOutlet private var ageTextField: UITextField!
     @IBOutlet private var spinner: UIActivityIndicatorView!
 
+    // MARK: - View Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
+    }
+
     // MARK: - IBActions
 
     /// Gets called when the user taps on the GET button. Performs a GET request to the server.
     @IBAction private func GETButtonTapped(_ sender: Any) {
         spinner.startAnimating()
-        
+
         guard let name = nameTextField.text, let age = Int(ageTextField.text ?? "") else { return }
 
         let userStruct = User(name: name, age: age)
-        
+
         // Create request
         let request = AF.request(
             Endpoint.GET.url(),
             method: Endpoint.GET.httpMethod,
             parameters: userStruct,
-            encoder: URLEncodedFormParameterEncoder.default)
-        
+            encoder: URLEncodedFormParameterEncoder.default
+        )
+
         // Interpret response
         request.responseDecodable(of: ExpectedResponse.self) { response in
             self.spinner.stopAnimating()
@@ -49,9 +57,9 @@ class ViewController: UIViewController {
     /// Gets called when the user taps on the POST button. Performs a POST request to the server.
     @IBAction func POSTButtonTapped(_ sender: Any) {
         spinner.startAnimating()
-        
+
         guard let name = nameTextField.text, let age = Int(ageTextField.text ?? "") else { return }
-        
+
         let userStruct = User(name: name, age: age)
 
         // Create request
@@ -59,7 +67,8 @@ class ViewController: UIViewController {
             Endpoint.POST.url(),
             method: Endpoint.POST.httpMethod,
             parameters: userStruct,
-            encoder: JSONParameterEncoder.default)
+            encoder: JSONParameterEncoder.default
+        )
 
         // Interpret response
         request.response { response in
@@ -73,16 +82,5 @@ class ViewController: UIViewController {
                 self.presentAlert(title: "🤦🏻‍♂️ Error 🤦🏻‍♂️", message: error.localizedDescription)
             }
         }
-    }
-}
-
-
-// Placing life cycle in an extension because its implementation is not the main focus here
-extension ViewController {
-    // MARK: - View Lifecycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        hideKeyboardWhenTappedAround()
     }
 }
